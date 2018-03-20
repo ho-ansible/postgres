@@ -39,7 +39,14 @@
   - postgresql.conf
   notify: restart postgresql
 
-- name: PostgreSQL | backup cron
+- name: PostgreSQL | logrotate config
+  tags:
+    - log
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/postgresql-common
+
+- name: | backup cron
   tags:
   - cron
   cron:
