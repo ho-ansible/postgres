@@ -42,9 +42,9 @@
 - name: PostgreSQL | logrotate config
   tags:
     - log
-  template:
-    src: logrotate.j2
+  copy:
     dest: /etc/logrotate.d/postgresql-common
+    content: "/var/log/postgresql/*.log {}"
 
 - name: PostgreSQL | backup cron
   tags:
