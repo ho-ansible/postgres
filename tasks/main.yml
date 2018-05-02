@@ -15,15 +15,13 @@
 
 - name: PostgreSQL | packages
   tags:
-  - package
+    - package
   package:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-  - "postgresql-{{ postgresql_version }}"
-  - "postgresql-client-{{ postgresql_version }}"
-  - libpq-dev
-  - python-psycopg2
+    name: 
+      - "postgresql-{{ postgresql_version }}"
+      - "postgresql-client-{{ postgresql_version }}"
+      - libpq-dev
+      - python-psycopg2
 
 - name: PostgreSQL | config
   tags:
