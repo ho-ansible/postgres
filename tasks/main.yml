@@ -39,8 +39,8 @@
 
 - name: PostgreSQL | logrotate config
   tags:
-    - log
-  template:
+    - logrotate
+  copy:
     dest: /etc/logrotate.d/postgresql-common
     content: "/var/log/postgresql/*.log { su postgres adm }"
 
