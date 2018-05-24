@@ -32,9 +32,9 @@
     owner: "{{ postgresql_user }}"
     group: "{{ postgresql_user }}"
     mode: 0640
-  with_items:
-  - pg_hba.conf
-  - postgresql.conf
+  loop:
+    - pg_hba.conf
+    - postgresql.conf
   notify: restart postgresql
 
 - name: PostgreSQL | logrotate config
