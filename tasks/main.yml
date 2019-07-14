@@ -50,8 +50,8 @@
   cron:
     name: 'postgresql cron'
     cron_file: postgres
-    minute: 18
-    hour: 3
+    minute: '18'
+    hour: '3'
     user: "{{ postgresql_user }}"
     job: "/usr/bin/pg_dumpall -w | gzip -c --rsyncable > {{ postgresql_dump }}"
 
