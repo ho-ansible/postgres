@@ -1,26 +1,26 @@
 ---
 - name: PostgreSQL | apt key
   tags:
-    - apt
+  - apt
   apt_key:
     url: "{{ postgres_key }}"
 
 - name: PostgreSQL | apt repo
   tags:
-    - apt
+  - apt
   apt_repository:
     repo: "deb {{ postgres_repo }} {{ ansible_distribution_release }}-pgdg main"
     filename: postgresql
 
 - name: PostgreSQL | packages
   tags:
-    - package
+  - package
   package:
     name: 
-      - "postgresql-{{ postgresql_version }}"
-      - "postgresql-client-{{ postgresql_version }}"
-      - libpq-dev
-      - python-psycopg2
+    - "postgresql-{{ postgresql_version }}"
+    - "postgresql-client-{{ postgresql_version }}"
+    - libpq-dev
+    - python-psycopg2
 
 - name: PostgreSQL | config
   tags:
@@ -32,20 +32,20 @@
     group: "{{ postgresql_user }}"
     mode: 0640
   loop:
-    - pg_hba.conf
-    - postgresql.conf
+  - pg_hba.conf
+  - postgresql.conf
   notify: restart postgresql
 
 - name: PostgreSQL | logrotate config
   tags:
-    - logrotate
+  - logrotate
   copy:
     dest: /etc/logrotate.d/postgresql-common
     content: "/var/log/postgresql/*.log {\n  su postgres postgres \n}"
 
 - name: PostgreSQL | backup cron
   tags:
-    - cron
+  - cron
   cron:
     name: 'postgresql cron'
     cron_file: postgres
